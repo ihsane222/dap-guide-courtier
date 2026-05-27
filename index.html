@@ -901,7 +901,7 @@ h1, h2, h3, h4, h5, h6 {
         html += `<div class="card-section"><div class="card-section-title">Inspecteur</div>
           <div class="contact-item">
             <span class="contact-name">${esc(insp.name)}</span>
-            <span class="contact-role">Zone : ${esc(insp.zone)}</span>
+            ${insp.zone ? `<span class="contact-role">Zone : ${esc(insp.zone)}</span>` : ''}
             <div class="contact-details">
               <a href="mailto:${esc(insp.email)}">${esc(insp.email)}</a>
               <span>${esc(insp.phone)}</span>
@@ -911,12 +911,40 @@ h1, h2, h3, h4, h5, h6 {
       }
 
       // Limites
-      if (company.limits && (company.limits.minPremium || company.limits.minCA || company.limits.notes)) {
+      if (company.limits && (company.limits.minPremium || company.limits.minCA || company.limits.minPersons || company.limits.notes)) {
         html += '<div class="card-section"><div class="card-section-title">Limites & Capacit&eacute;s</div><div class="limits-box">';
         if (company.limits.minPremium) html += `<div><strong>Prime min. :</strong> ${esc(company.limits.minPremium)}</div>`;
         if (company.limits.minCA) html += `<div><strong>CA min. :</strong> ${esc(company.limits.minCA)}</div>`;
-        if (company.limits.notes) html += `<div>${esc(company.limits.notes)}</div>`;
+        if (company.limits.minPersons) html += `<div><strong>Nbre personnes min. :</strong> ${esc(company.limits.minPersons)}</div>`;
+        if (company.limits.notes) html += `<div style="white-space:pre-wrap;margin-top:6px;">${esc(company.limits.notes)}</div>`;
         html += '</div></div>';
+      }
+
+      // Appétence sectorielle
+      if (company.sectorAppetite) {
+        html += `<div class="card-section"><div class="card-section-title">App&eacute;tence sectorielle</div>
+          <div style="white-space:pre-wrap;">${esc(company.sectorAppetite)}</div></div>`;
+      }
+
+      // Activités refusées globales
+      if (company.globalRefused) {
+        html += `<div class="card-section"><div class="card-section-title">Activit&eacute;s refus&eacute;es (g&eacute;n&eacute;ral)</div>
+          <div style="white-space:pre-wrap;">${esc(company.globalRefused)}</div></div>`;
+      }
+
+      // Documents niveau compagnie (ex. fiche contacts)
+      if (company.documents && company.documents.length) {
+        html += '<div class="card-section"><div class="card-section-title">Documents</div>';
+        company.documents.forEach(d => {
+          html += `<div>📎 <a href="${esc(d.url)}" target="_blank">${esc(d.name)}</a></div>`;
+        });
+        html += '</div>';
+      }
+
+      // Remarques additionnelles
+      if (company.additionalNotes) {
+        html += `<div class="card-section"><div class="card-section-title">Remarques</div>
+          <div style="white-space:pre-wrap;">${esc(company.additionalNotes)}</div></div>`;
       }
 
       html += '</div></div>';
@@ -989,19 +1017,22 @@ h1, h2, h3, h4, h5, h6 {
 
     html += `<div class="data-table-container"><table class="data-table">
       <thead><tr>
-        <th>Compagnie</th><th>Produit</th><th>M&eacute;thode</th><th>D&eacute;tail</th><th>Notes</th>
+        <th>Compagnie</th><th>Produit</th><th>M&eacute;thode</th><th>D&eacute;tail</th><th>Infos requises</th><th>Notes</th>
       </tr></thead><tbody>`;
 
     rows.forEach(({ company, product, process }) => {
       let detail = '';
       if (process.portalUrl) detail += `<a href="${esc(process.portalUrl)}" target="_blank">Acc&eacute;der au portail</a>`;
       if (process.email) detail += (detail ? '<br>' : '') + `<a href="mailto:${esc(process.email)}">${esc(process.email)}</a>`;
+      const sheet = company.productSheets[product];
+      const reqInfo = sheet && sheet.requiredInfo ? sheet.requiredInfo : '';
 
       html += `<tr>
         <td><strong>${esc(company.name)}</strong></td>
         <td>${esc(product)}</td>
         <td><span class="method-badge">${esc(process.method)}</span></td>
         <td>${detail || '—'}</td>
+        <td style="white-space:pre-wrap;">${reqInfo ? esc(reqInfo) : '—'}</td>
         <td>${process.notes ? esc(process.notes) : '—'}</td>
       </tr>`;
     });
@@ -1015,6 +1046,12 @@ h1, h2, h3, h4, h5, h6 {
     const el = document.getElementById('view-documents');
     const rows = [];
     DATA.companies.forEach(company => {
+      (company.documents || []).forEach(doc => {
+        const searchText = [company.name, doc.name, doc.type].join(' ');
+        if (matchesFilter(searchText, filter)) {
+          rows.push({ company, product: '—', doc });
+        }
+      });
       Object.entries(company.productSheets || {}).forEach(([product, sheet]) => {
         (sheet.documents || []).forEach(doc => {
           const searchText = [company.name, product, doc.name, doc.type].join(' ');
@@ -1063,6 +1100,12 @@ h1, h2, h3, h4, h5, h6 {
     const el = document.getElementById('view-refus');
     const rows = [];
     DATA.companies.forEach(company => {
+      if (company.globalRefused) {
+        const searchText = [company.name, 'global', company.globalRefused].join(' ');
+        if (matchesFilter(searchText, filter)) {
+          rows.push({ company, product: '(tous produits)', activities: [company.globalRefused] });
+        }
+      }
       Object.entries(company.productSheets || {}).forEach(([product, sheet]) => {
         if (sheet.refusedActivities && sheet.refusedActivities.length > 0) {
           const searchText = [company.name, product, ...sheet.refusedActivities].join(' ');
