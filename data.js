@@ -35,7 +35,8 @@ window.DAP_DATA = {
     "Tous Risques Electronique",
     "Bris de Machine",
     "Responsabilité Décennale",
-    "Assistance"
+    "Assistance",
+    "Tous Risques Chantier"
   ],
 
   // ── Informations nécessaires par type de produit (Vue 3) ──
@@ -118,6 +119,128 @@ window.DAP_DATA = {
 
   // ── Compagnies d'assurance ──
   companies: [
+    {
+      id: "ag-insurance",
+      name: "AG Insurance",
+      contacts: [],
+      inspector: { name: "Coirazza", email: "laurent.coirazza@aginsurance.be", phone: "+10491969565", zone: "" },
+      limits: { minPremium: "", minCA: "", minPersons: "10", notes: "Critères de segmentation pour rentrer en entreprises : minimum 10 ETP au sein d'une entitée ou d'un groupement avec même actionnaire (>=75%) ou risque spécial ou bureau d'intérim, ou LPS ==> incendie, rc (France, Allemagne, Pays-Bas, Luxembourg)." },
+      sectorAppetite: "Nous analysons toutes les demandes. Certains secteurs peuvent être compliqués dans une branche mais pas dans une autre. Très dépendant des statistiques.",
+      globalRefused: "",
+      documents: [
+        { name: "guide cie 2026 E.pdf", url: "#", type: "contacts" },
+      ],
+      additionalNotes: "",
+      submittedAt: "2026-04-27T13:34:00.000Z",
+      productSheets: {
+        "Incendie Entreprise": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "Données correctes et suffisantes : Description détaillée des activités. Garanties souhaitées, (sous-)limites, franchises. Numéro BCE correct. Motif de la demande : Quote-part de coassurance / rang supérieur, Révision / extension d'un client AG existant, Transfert par courtier, Prospection / consultation du marché / mise en blocage / assainissement, Marchés publics. Statistiques de sinistres sur les 5 dernières années (émanant de l'assureur, pas de statistiques du courtier). Copie récente de la police actuelle, y compris la prime payée. Rapports d'inspection récents (incendie)." },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "RC Exploitation": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "Données correctes et suffisantes : Description détaillée des activités. Garanties souhaitées, (sous-)limites, franchises. Numéro BCE correct. Chiffre d'affaires récent, masse salariale ouvriers/employés. Motif de la demande : Quote-part de coassurance / rang supérieur en RC / CAR, Révision / extension d'un client AG existant, Transfert par courtier, Prospection / consultation du marché / mise en blocage / assainissement, Marchés publics. Statistiques de sinistres sur les 5 dernières années (données financières + détails des sinistres individuels, émanant de l'assureur). Copie récente de la police actuelle + Questionnaire pour recall (par ex).",
+          documents: [],
+          refusedActivities: []
+        },
+        "RC Organisateurs": {
+          appetite: "green",
+          process: { method: "Portail", portalUrl: "AG online", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Assistance": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Tous Risques Electronique": {
+          appetite: "green",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [
+            { name: "Top Electronique.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "Accidents du Travail": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "Données correctes et suffisantes : Description détaillée des activités. Garanties souhaitées. Numéro BCE correct. Motif de la demande (idem RC). Statistiques de sinistres sur les 5 dernières années (données financières + détails des sinistres individuels, émanant de l'assureur). Copie récente de la police actuelle, y compris la prime payée.",
+          documents: [],
+          refusedActivities: []
+        },
+        "Responsabilité Décennale": {
+          appetite: "green",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "Questionnaire spécifique RC10 + TRC",
+          documents: [
+            { name: "Questionnaire TRC_00792067233_F (1).pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "Transport / Marine": {
+          appetite: "yellow",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [
+            { name: "assurances marchandises et matériels transportés.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "Tous Risques Chantier": {
+          appetite: "green",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [
+            { name: "Questionnaire TRC_00792067233_F (5).pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "Bris de Machine": {
+          appetite: "green",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "",
+          documents: [
+            { name: "bris de machine.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "RC Mandataires Sociaux": {
+          appetite: "green",
+          process: { method: "Questionnaire", portalUrl: "", email: "souscription.entreprises@aginsurance.be", notes: "" },
+          requiredInfo: "Données correctes et suffisantes : Description détaillée des activités. Garanties souhaitées, (sous-)limites, franchises. Numéro BCE correct. Questionnaire D&O. Données financières.",
+          documents: [
+            { name: "D&O.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "RC Professionnelle": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "", notes: "" },
+          requiredInfo: "Données correctes et suffisantes : Description détaillée des activités. Garanties souhaitées, (sous-)limites, franchises. Numéro BCE correct. Questionnaire D&O. Données financières.",
+          documents: [
+            { name: "Liab_RCEntreprise_PropositionAssurance_Consultant_FR.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: []
+        },
+        "Protection Juridique": {
+          appetite: "yellow",
+          process: { method: "", portalUrl: "", email: "", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        }
+      }
+    },
+
     {
       id: "stoik",
       name: "Stoïk",
