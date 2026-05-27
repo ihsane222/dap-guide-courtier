@@ -119,6 +119,182 @@ window.DAP_DATA = {
 
   // ── Compagnies d'assurance ──
   companies: [
+
+    {
+      id: "legal-village",
+      name: "Legal Village",
+      contacts: [],
+      inspector: { name: "Mathilde Hiblot", email: "mathilde.hiblot@legalvillage.be", phone: "+32475293504", zone: "" },
+      limits: { minPremium: "", minCA: "", minPersons: "", notes: "Activités acceptées sous réserve d'analyse : construction générale, transport, agriculture... Pour les garagistes, sont exclus les litiges contractuels avec des clients, des fournisseurs de produits et des prestataires de services, en relation avec la livraison, la vente, l'achat, la réparation, l'entretien, la location ou la fabrication des véhicules, d'accessoires, ainsi que tout matériel destiné à être placé sur ou dans le véhicule." },
+      sectorAppetite: "Secteur (para)-médical, Horeca.",
+      globalRefused: "",
+      documents: [],
+      additionalNotes: "",
+      submittedAt: "2026-05-05T06:58:00.000Z",
+      productSheets: {
+        "Protection Juridique": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "mathilde.hiblot@legalvillage.be", notes: "" },
+          requiredInfo: "Activité. Nombre de travailleurs (administrateurs compris). Nombre de sièges d'exploitation. Véhicules : nombre, type et usage. Si biens à couvrir en plus des sièges d'exploitation : prime incendie nette et abex + nombre de baux commerciaux et/ou privés si les litiges contractuels de location doivent être couverts.",
+          documents: [],
+          refusedActivities: []
+        }
+      }
+    },
+
+
+    {
+      id: "bcoh",
+      name: "BCOH SA",
+      contacts: [
+        { name: "Philippe Nothomb", role: "Tous risques événements", email: "philippe@bcoh.be", phone: "+32477650136" },
+      ],
+      inspector: { name: "Didier Van Wassenhove", email: "didier@bcoh.be", phone: "+3225430250", zone: "" },
+      limits: { minPremium: "715 EUR", minCA: "1.000.000 EUR", minPersons: "3", notes: "" },
+      sectorAppetite: "Secteur événementiel et industrie du cinéma.",
+      globalRefused: "Pandémie, guerre, cyberattaques.",
+      documents: [],
+      additionalNotes: "www.bcoh.be",
+      submittedAt: "2026-04-29T07:51:00.000Z",
+      productSheets: {
+        "RC Exploitation": {
+          appetite: "yellow",
+          process: { method: "Email", portalUrl: "", email: "info@bcoh.be", notes: "Uniquement pour le secteur événementiel et film." },
+          requiredInfo: "Chiffre d'affaires, sinistralité, nombre d'employés.",
+          documents: [],
+          refusedActivities: []
+        }
+      }
+    },
+
+
+    {
+      id: "axa",
+      name: "AXA Belgium",
+      contacts: [],
+      inspector: { name: "Thierry DEHON", email: "thierry.dehon@axa.be", phone: "+32 492 84 63 29", zone: "" },
+      limits: { minPremium: "Variable selon branche/département/produit", minCA: "Néant", minPersons: "0", notes: "Information impossible à synthétiser. Variable en fonction de la branche, du département, du produit, etc." },
+      sectorAppetite: "Etant un assureur généraliste, pas d'appétence sectorielle prépondérante.",
+      globalRefused: "Ci-après les exclusions des affaires pouvant être souscrites via \"BIZZLINK\". Pour les autres branches/produits, impossible à synthétiser car pouvant être variable d'un département à l'autre.\n\nExclusions BIZZLINK :\nExtraction de houille — Extraction de lignite — Fabrication de produits à base de tabac — Fabrication de produits explosifs (y compris pyrotechnie) — Fabrication d'ouvrages en fibre-ciment — Fabrication d'autres produits minéraux non métalliques (avec amiante) — Élaboration et transformation de matières nucléaires — Fabrication de réacteurs nucléaires — Fabrication d'armes et de munitions — Fabrication de détecteurs et de moniteurs de radiation — Fabrication d'équipements d'irradiation médicale, d'équipements électromédicaux et électrothérapeutiques — Fabrication d'accélérateurs de particules — Construction de bateaux et navires militaires — Construction d'aéronefs et d'engins spatiaux militaires et machines connexes — Construction de véhicules militaires de combat — Fabrication d'articles divers en ivoire, en corne et en os — Réparation et entretien d'aéronefs et d'engins spatiaux civils — Réparation et entretien de véhicules de combat, de navires, de bateaux, d'aéronefs et d'engins spatiaux militaires — Collecte de déchets nucléaires — Mise en décharge ou stockage permanent de déchets nucléaires — Dépollution d'usines et sites nucléaires — Désamiantage — Night-shop — Hôtel de jour — Wagons-lits — Discothèques, dancings et similaires — Production et négoce de cryptomonnaie — Laboratoires médicaux avec expérience sur animaux vivants — Guérisseurs, rebouteux, etc.\n\nExclusions RC Professionnelle :\nExtraction de houille — Extraction de lignite — Extraction de pétrole brut — Extraction de gaz naturel — Extraction de minerais d'uranium et de thorium — Fabrication de produits à base de tabac — Fabrication de produits explosifs (y compris pyrotechnie) — Fabrication d'ouvrages en fibre-ciment — Fabrication d'autres produits minéraux non métalliques (avec amiante) — Élaboration et transformation de matières nucléaires — Fabrication d'armes et de munitions — Construction d'aéronefs et d'engins spatiaux civils et machines connexes — Construction d'aéronefs et d'engins spatiaux militaires et machines connexes — Construction de véhicules militaires de combat — Réparation et entretien d'aéronefs et d'engins spatiaux civils — Commerce de détail d'armes et de munitions — Commerce de détail d'articles de pêche et de chasse (avec armes et munitions) — Transports spatiaux — Défense — Organisation de jeux de hasard et d'argent — Agence de paris sportifs — Activités des sportifs indépendants — Autres services personnels — Activités des graphologues, des astrologues, des voyants, des radiesthésistes, des spirites et similaires — Services de recherche généalogique — Exploitation de machines de services personnels fonctionnant avec des pièces de monnaie (photomatons, consignes à pièces, etc).",
+      documents: [
+        { name: "Répertoire gestionnaires AXA P&C Corpo 03.2026.xlsx", url: "#", type: "contacts" },
+      ],
+      additionalNotes: "- Les informations reprises dans les onglets précédents ne sont qu'indicatives.\n- Vous trouverez toutes les propositions d'assurances et fiches produits via le Portail d'AXA.\n- De nombreuses offres \"PME\" peuvent être tarifées en ligne au travers de notre outil digital \"Bizzlink\".",
+      submittedAt: "2026-04-28T13:05:00.000Z",
+      productSheets: {
+        "Incendie Entreprise": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Pour certaines activités, tarification en ligne également possible via \"Bizzlink\". Questionnaire uniquement valable pour les PME." },
+          requiredInfo: "Statistique sinistre officielle si reprise d'un contrat existant. Proposition dûment complétée et signée.",
+          documents: [
+            { name: "Talensia - easy questionnaire - proposition d'assurance - 20260201 1.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Cf. activités refusées au niveau Compagnie (toutes branches confondues)"]
+        },
+        "RC Exploitation": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Pour certaines activités, tarification en ligne également possible via \"Bizzlink\". Questionnaire uniquement valable pour les PME." },
+          requiredInfo: "Statistique sinistre officielle si reprise d'un contrat existant. Proposition dûment complétée et signée.",
+          documents: [
+            { name: "Talensia - easy questionnaire - proposition d'assurance - 20260201 1.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Cf. activités refusées au niveau Compagnie (toutes branches confondues)"]
+        },
+        "Protection Juridique": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "", notes: "A voir avec les collaborateurs de \"Legal Village\"" },
+          requiredInfo: "A voir avec les collaborateurs de \"Legal Village\"",
+          documents: [],
+          refusedActivities: []
+        },
+        "RC Professionnelle": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "https://distributorportal.axa.be/axalogin", email: "newbizz.corporate@axa.be", notes: "Vu le nombre de questionnaires (plusieurs possibles en fonction du secteur d'activités) les questionnaires sont accessibles via le portail distributeur. Pour certaines activités, tarification en ligne également possible via \"Bizzlink\"." },
+          requiredInfo: "Statistique sinistre officielle si reprise d'un contrat existant. Proposition dûment complétée et signée.",
+          documents: [],
+          refusedActivities: ["Cf. activités refusées au niveau Compagnie (toutes branches confondues)"]
+        },
+        "RC Mandataires Sociaux": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Solvabilité prépondérante pour l'acceptation du risque." },
+          requiredInfo: "Statistique sinistre officielle si reprise d'un contrat existant. Bilan des 3 dernières années. Proposition dûment complétée et signée (voir annexe).",
+          documents: [
+            { name: "QuestionnaireD&O.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Assistance": {
+          appetite: "yellow",
+          process: { method: "Mixte", portalUrl: "", email: "", notes: "A voir avec les collaborateurs de \"AXA Assistance\"" },
+          requiredInfo: "A voir avec les collaborateurs de \"AXA Assistance\"",
+          documents: [],
+          refusedActivities: []
+        },
+        "RC Organisateurs": {
+          appetite: "yellow",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.iard.charleroi@axa.be", notes: "Spécificités à voir avec votre \"Business Manager\"." },
+          requiredInfo: "Date, durée et nature de l'événement organisé. Nombre de participants (estimation).",
+          documents: [],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Bris de Machine": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Age maximum de la machine au moment de la souscription = 10 ans." },
+          requiredInfo: "Statistique sinistres officielle. Marque, type, numéro de série, année de construction, valeur à neuf de la machine et usage exact de la machine.",
+          documents: [],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Tous Risques Electronique": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "" },
+          requiredInfo: "Statistique sinistres officielle. Catégorie de matériel à couvrir (matériel fixe et/ou portable). Valeur à neuf à couvrir ventilée entre les catégories. Étendue territoriale pour le matériel portable (Belgique, Europe, Monde entier ?).",
+          documents: [
+            { name: "Talensia - easy questionnaire - proposition d'assurance - 20260201 1.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Accidents du Travail": {
+          appetite: "green",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Proposition ci-annexée uniquement valable pour les PME." },
+          requiredInfo: "Statistique sinistres officielle si reprise d'un contrat existant. Activités exactes. Catégorie de personnel à couvrir (Employés / Ouvriers). Masse salariale brute hors charges patronales ventilée par catégorie de personnel. Faut-il prévoir la couverture de l'Excédent-Loi ?",
+          documents: [
+            { name: "Talensia - easy questionnaire - proposition d'assurance - 20260201 1.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Tous Risques Chantier": {
+          appetite: "yellow",
+          process: { method: "Email", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Il existe un formulaire simplifié permettant de remettre tarif sous certaines conditions pour des chantiers d'une valeur maximale de 1.500.000,00 EUR. Impossible de couvrir un chantier qui a déjà commencé !" },
+          requiredInfo: "Nature des travaux. Date de début des travaux. Durée estimée des travaux. Valeur des travaux. Si possible cahier des charges et plans. Proposition dûment complétée et signée.",
+          documents: [],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Cyber": {
+          appetite: "yellow",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "Produit valable uniquement pour des sociétés de maximum 50 personnes !" },
+          requiredInfo: "Proposition dûment complétée et signée. Statistique sinistre officielle si reprise d'un contrat existant.",
+          documents: [
+            { name: "267 - Questionnaire Cyber 012019.pdf", url: "#", type: "questionnaire" },
+          ],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Responsabilité Décennale": {
+          appetite: "yellow",
+          process: { method: "Mixte", portalUrl: "", email: "newbizz.corporate@axa.be", notes: "" },
+          requiredInfo: "Proposition dûment complétée et signée. Statistique sinistre officielle si reprise d'un contrat \"Abonnement\" existant.",
+          documents: [],
+          refusedActivities: ["Interroger la compagnie au cas par cas."]
+        },
+        "Transport / Marine": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "marine@verheyen.be", notes: "A voir avec les collaborateurs de \"VERHEYEN\"." },
+          requiredInfo: "A voir avec les collaborateurs de \"VERHEYEN\".",
+          documents: [],
+          refusedActivities: []
+        }
+      }
+    },
+
     {
       id: "ag-insurance",
       name: "AG Insurance",
@@ -234,6 +410,73 @@ window.DAP_DATA = {
         "Protection Juridique": {
           appetite: "yellow",
           process: { method: "", portalUrl: "", email: "", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        }
+      }
+    },
+
+
+    {
+      id: "federale",
+      name: "Fédérale Assurance",
+      contacts: [],
+      inspector: { name: "Johan Claerbout", email: "johan.claerbout@federale.be", phone: "0490585114", zone: "" },
+      limits: { minPremium: "20.000 EUR", minCA: "", minPersons: "", notes: "Prime minimum 20.000€ pour la branche principale (non-clients). Capacités : +/- 20.000.000€ en Incendie, +/- 30.000.000€ en TRC." },
+      sectorAppetite: "Construction.\nPar branche :\n- AT: tous les secteurs\n- Flotte: pas de transport pour compte de tiers, autocars, taxis...\n- RC: construction\n- Incendie: construction, logistique",
+      globalRefused: "Risques nucléaires.",
+      documents: [
+        { name: "Liste des données de contact pour courtier.xlsx", url: "#", type: "contacts" },
+      ],
+      additionalNotes: "",
+      submittedAt: "2026-04-28T07:18:00.000Z",
+      productSheets: {
+        "Incendie Entreprise": {
+          appetite: "yellow",
+          process: { method: "Email", portalUrl: "", email: "incendie.brand@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "RC Exploitation": {
+          appetite: "yellow",
+          process: { method: "Email", portalUrl: "", email: "accidents.ongevallen@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Bris de Machine": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "engineering@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Tous Risques Electronique": {
+          appetite: "yellow",
+          process: { method: "Email", portalUrl: "", email: "engineering@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Accidents du Travail": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "accidents.ongevallen@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Responsabilité Décennale": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "engineering@federale.be", notes: "" },
+          requiredInfo: "",
+          documents: [],
+          refusedActivities: []
+        },
+        "Tous Risques Chantier": {
+          appetite: "green",
+          process: { method: "Email", portalUrl: "", email: "engineering@federale.be", notes: "" },
           requiredInfo: "",
           documents: [],
           refusedActivities: []
