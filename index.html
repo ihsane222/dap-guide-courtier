@@ -633,11 +633,90 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
+/* ── Stats sous la matrice ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+.stat-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+.top-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.top-title {
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.top-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: rank;
+}
+.top-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gray-light);
+  counter-increment: rank;
+  font-size: 13px;
+}
+.top-list li:last-child { border-bottom: 0; }
+.top-list li::before {
+  content: counter(rank) ".";
+  color: var(--gray);
+  font-weight: 600;
+  margin-right: 8px;
+  min-width: 18px;
+}
+.top-list li span:first-of-type { flex: 1; }
+.top-count {
+  background: var(--green-bg);
+  color: var(--green);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .header { padding: 0 16px; }
+  .header { padding: 8px 16px; flex-wrap: wrap; gap: 8px; }
   .header-subtitle { display: none; }
-  .search-global { width: 180px; }
+  .search-global { width: 100%; order: 3; }
   .tab-bar { padding: 0 16px; }
   .tab { padding: 12px 14px; font-size: 12px; }
   .main { padding: 16px; }
@@ -645,6 +724,8 @@ h1, h2, h3, h4, h5, h6 {
   .info-grid { grid-template-columns: 1fr; }
   .view-header { flex-direction: column; align-items: flex-start; }
   .filter-input { width: 100%; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .top-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Print ── */
@@ -701,6 +782,9 @@ h1, h2, h3, h4, h5, h6 {
   'use strict';
 
   const DATA = window.DAP_DATA;
+  // Tri alphabétique des compagnies par défaut (case + accent insensible).
+  DATA.companies.sort((a, b) => a.name.localeCompare(b.name, 'fr', { sensitivity: 'base' }));
+
   const VIEWS = ['matrix','fiches','infos','processus','documents','refus'];
 
   const appetiteLabels = {
@@ -724,6 +808,26 @@ h1, h2, h3, h4, h5, h6 {
   function getAppetite(company, product) {
     const sheet = company.productSheets?.[product];
     return sheet ? sheet.appetite : 'none';
+  }
+
+  // Découpe un bloc texte d'activités refusées en liste à puces.
+  // Sépare sur ; ou — (avec espaces) ou retours à la ligne.
+  function splitRefused(text) {
+    if (!text) return [];
+    return text
+      .split(/\s*(?:;|—|\n|●)\s*/)
+      .map(s => s.trim().replace(/^[•\-\*]\s*/, '').replace(/\.$/, ''))
+      .filter(s => s.length > 2);
+  }
+
+  function refusedList(text) {
+    const items = splitRefused(text);
+    if (items.length <= 1) {
+      return `<div style="white-space:pre-wrap;">${esc(text)}</div>`;
+    }
+    return '<ul style="margin:0;padding-left:20px;">' +
+      items.map(i => `<li style="margin-bottom:4px;">${esc(i)}</li>`).join('') +
+      '</ul>';
   }
 
   // ── Router ──
@@ -819,7 +923,73 @@ h1, h2, h3, h4, h5, h6 {
     });
 
     html += '</tbody></table></div>';
+
+    // ── Récap statistique sous la matrice ──
+    const stats = computeStats(companies);
+    html += `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">${stats.totalCompanies}</div>
+          <div class="stat-label">Compagnies référencées</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${stats.totalProducts}</div>
+          <div class="stat-label">Produits couverts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${stats.totalGreen}</div>
+          <div class="stat-label">Appétences fortes (combinaisons compagnie × produit)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">${stats.totalYellow}</div>
+          <div class="stat-label">Combinaisons sélectives</div>
+        </div>
+      </div>
+
+      <div class="top-grid">
+        <div class="top-card">
+          <h3 class="top-title">Top compagnies par appétence forte</h3>
+          <ol class="top-list">
+            ${stats.topCompaniesByGreen.map(([n, c]) => `<li><span>${esc(n)}</span><span class="top-count">${c}</span></li>`).join('')}
+          </ol>
+        </div>
+        <div class="top-card">
+          <h3 class="top-title">Produits les mieux couverts</h3>
+          <ol class="top-list">
+            ${stats.topProductsByGreen.map(([n, c]) => `<li><span>${esc(n)}</span><span class="top-count">${c}</span></li>`).join('')}
+          </ol>
+        </div>
+      </div>
+    `;
+
     el.innerHTML = html;
+  }
+
+  // Calcule les stats agrégées pour la vue matrice.
+  function computeStats(companies) {
+    let totalGreen = 0, totalYellow = 0;
+    const byCompany = {}, byProduct = {};
+    const coveredProducts = new Set();
+    companies.forEach(c => {
+      byCompany[c.name] = 0;
+      Object.entries(c.productSheets || {}).forEach(([p, s]) => {
+        if (s.appetite === 'green') {
+          totalGreen++;
+          byCompany[c.name]++;
+          byProduct[p] = (byProduct[p] || 0) + 1;
+          coveredProducts.add(p);
+        }
+        if (s.appetite === 'yellow') totalYellow++;
+      });
+    });
+    return {
+      totalCompanies: companies.length,
+      totalProducts: coveredProducts.size,
+      totalGreen,
+      totalYellow,
+      topCompaniesByGreen: Object.entries(byCompany).sort((a, b) => b[1] - a[1]).slice(0, 5),
+      topProductsByGreen: Object.entries(byProduct).sort((a, b) => b[1] - a[1]).slice(0, 5)
+    };
   }
 
   // ── Navigation matrice → fiche ──
@@ -929,7 +1099,7 @@ h1, h2, h3, h4, h5, h6 {
       // Activités refusées globales
       if (company.globalRefused) {
         html += `<div class="card-section"><div class="card-section-title">Activit&eacute;s refus&eacute;es (g&eacute;n&eacute;ral)</div>
-          <div style="white-space:pre-wrap;">${esc(company.globalRefused)}</div></div>`;
+          ${refusedList(company.globalRefused)}</div>`;
       }
 
       // Documents niveau compagnie (ex. fiche contacts)
@@ -1136,11 +1306,16 @@ h1, h2, h3, h4, h5, h6 {
       </tr></thead><tbody>`;
 
     rows.forEach(({ company, product, activities }) => {
+      // Aplatit : si une "activité" est en fait un long texte, on la découpe.
+      const flat = activities.flatMap(a => {
+        const split = splitRefused(a);
+        return split.length > 1 ? split : [a];
+      });
       html += `<tr>
         <td><strong>${esc(company.name)}</strong></td>
         <td>${esc(product)}</td>
         <td><div class="refused-pills">`;
-      activities.forEach(a => {
+      flat.forEach(a => {
         html += `<span class="refused-pill">${esc(a)}</span>`;
       });
       html += '</div></td></tr>';

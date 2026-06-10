@@ -510,7 +510,7 @@ window.DAP_DATA = {
 
     {
       id: "verheyen",
-      name: "Jean Verheyen",
+      name: "Verheyen",
       contacts: [
         { name: "Patricia Dillen", role: "Art & Patrimoine - souscription", email: "pdi@verheyen.be", phone: "022506390" },
         { name: "Caroline Ghekiere", role: "Transport Marchandises", email: "c.ghekiere@verheyen.be", phone: "022506334" },
@@ -549,7 +549,7 @@ window.DAP_DATA = {
 
     {
       id: "vivium",
-      name: "vivium",
+      name: "Vivium",
       contacts: [
         { name: "henri marroy", role: "incendie", email: "henri.marroy@vivium.be", phone: "" },
         { name: "ludovic nicolas", role: "RC", email: "Ludovic.Nicolas@pvgroup.be", phone: "" },
