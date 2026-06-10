@@ -633,6 +633,27 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 14px;
 }
 
+/* ── Documents manquants ── */
+.doc-missing {
+  color: var(--gray);
+  font-style: italic;
+  text-decoration: line-through;
+  cursor: help;
+}
+.doc-missing-tag {
+  display: inline-block;
+  background: var(--amber-bg);
+  color: var(--amber);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 8px;
+  border-radius: 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
 /* ── Stats sous la matrice ── */
 .stats-grid {
   display: grid;
@@ -836,6 +857,17 @@ h1, h2, h3, h4, h5, h6 {
     return '<ul style="margin:0;padding-left:20px;">' +
       items.map(i => `<li style="margin-bottom:4px;">${esc(i)}</li>`).join('') +
       '</ul>';
+  }
+
+  // Affiche un lien document. Si l'URL est manquante ou "#", marque le fichier
+  // comme non disponible (à redemander à la compagnie) au lieu d'ouvrir un
+  // onglet vide.
+  function docLink(d) {
+    const lost = !d.url || d.url === '#';
+    if (lost) {
+      return `📎 <span class="doc-missing" title="Fichier non disponible — à redemander à la compagnie">${esc(d.name)}</span> <span class="doc-missing-tag">non disponible</span>`;
+    }
+    return `📎 <a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.name)}</a>`;
   }
 
   // ── Router ──
@@ -1114,7 +1146,7 @@ h1, h2, h3, h4, h5, h6 {
       if (company.documents && company.documents.length) {
         html += '<div class="card-section"><div class="card-section-title">Documents</div>';
         company.documents.forEach(d => {
-          html += `<div>📎 <a href="${esc(d.url)}" target="_blank">${esc(d.name)}</a></div>`;
+          html += `<div>${docLink(d)}</div>`;
         });
         html += '</div>';
       }
@@ -1260,12 +1292,13 @@ h1, h2, h3, h4, h5, h6 {
       </tr></thead><tbody>`;
 
     rows.forEach(({ company, product, doc }) => {
+      const lost = !doc.url || doc.url === '#';
       html += `<tr>
         <td><strong>${esc(company.name)}</strong></td>
         <td>${esc(product)}</td>
         <td>${esc(doc.name)}</td>
         <td><span class="doc-type doc-type-${doc.type}">${esc(doc.type)}</span></td>
-        <td><a href="${esc(doc.url)}" target="_blank">Ouvrir</a></td>
+        <td>${lost ? '<span class="doc-missing" title="Fichier non disponible — à redemander à la compagnie">⚠️ Non disponible</span>' : `<a href="${esc(doc.url)}" target="_blank">Ouvrir</a>`}</td>
       </tr>`;
     });
 
