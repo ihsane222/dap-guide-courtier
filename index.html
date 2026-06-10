@@ -714,9 +714,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .header { padding: 8px 16px; flex-wrap: wrap; gap: 8px; }
+  .header {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: auto;
+    min-height: 56px;
+  }
+  .header-left, .header-right { width: auto; }
+  .header-right { width: 100%; order: 3; }
   .header-subtitle { display: none; }
-  .search-global { width: 100%; order: 3; }
+  .search-global { width: 100%; box-sizing: border-box; }
   .tab-bar { padding: 0 16px; }
   .tab { padding: 12px 14px; font-size: 12px; }
   .main { padding: 16px; }
